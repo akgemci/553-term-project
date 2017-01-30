@@ -1,3 +1,6 @@
+% Aysel Akgemci
+% Fall 2016 Term project
+% Particle Swarm Optimization Algorithm
 function [Lmresult Diresult PPresult Massresult] = PSO(iternumber) 
 
 Low_bound = [0.0000001 1 1];
@@ -23,7 +26,7 @@ for run = 1:max_run
     x=x_0; %initial population
     V=0.1*x_0; %initial velocity
     for i=1:particles
-        ftemp(i,1) = RF_mass_NoStrc(x_0(i,:));
+        ftemp(i,1) = cost_func(x_0(i,:));
     end
     [fmin0, index0] = min(ftemp);
     pBEST=x_0;
@@ -56,7 +59,7 @@ for run = 1:max_run
         
         % evaluate cost function
         for i=1:particles
-            f(i,1)=RF_mass_NoStrc(x(i,:));
+            f(i,1)=cost_func(x(i,:));
         end 
         % update pbest and function
         for i=1:particles
@@ -75,12 +78,12 @@ for run = 1:max_run
         % update gbest
         if minmin<fmin0
             gBEST = pBEST(index,:);
-            fmin0=minmin;
+            fmin0 = minmin;
         end
         
         %calculate tolerance after a number of iterations
         if iter>100;
-            tolerance=abs(ffmin(iter-100,run)-fmin0);
+            tolerance = abs(ffmin(iter-100,run)-fmin0);
         end
         
         % displaying iterative results
@@ -89,16 +92,16 @@ for run = 1:max_run
             
         end
         disp(sprintf('%8g   %8g      %8.4f',iter,index,fmin0));
-        iter=iter + 1;
+        iter = iter + 1;
     end
-    fvalue= RF_mass_NoStrc(gBEST);
-    fff(run)=fvalue;
+    fvalue = cost_func(gBEST);
+    fff(run) = fvalue;
     rgbest(run,:)=gBEST;
     disp(sprintf(' --------------------------------'));
 end
 disp(sprintf('final results\n'));
-[bestfun,bestrun]=min(fff)
-best_vars=rgbest(bestrun,:)
+[bestfun,bestrun] = min(fff)
+best_vars = rgbest(bestrun,:)
 
 
 Lmresult = rgbest(bestrun,1);
@@ -106,12 +109,8 @@ Diresult = rgbest(bestrun,2);
 PPresult = rgbest(bestrun,3);
 Massresult = bestfun;
 %ploting
-plot(ffmin(1:ffiter(bestrun),bestrun),'-k');
+plot(ffmin(1:ffiter(bestrun),bestrun));
 
-    
-      
-         
-        
     
     
    

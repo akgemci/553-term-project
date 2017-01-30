@@ -1,3 +1,9 @@
+%% AYSEL AKGEMCÝ - 1875566 
+% Fall 2016 Term Project
+% OPTIMIZATION OF THE MASS OF A RFPM GENERATOR USING PSO
+%% ----------------------- MAIN--------------------------
+% First, run the  main code which is AA_termproject.m 
+% then push 'RUN' button on the GUI
 function varargout = AA_termproject(varargin)
 % AA_TERMPROJECT MATLAB code for AA_termproject.fig
 %      AA_TERMPROJECT, by itself, creates a new AA_TERMPROJECT or raises the existing
@@ -82,8 +88,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 x = str2double(get(handles.iternum,'string'));
 results = zeros(1,4);
 [results(1) results(2) results(3) results(4)] = PSO(x);
-set(handles.lm, 'string', round(results(1)*100000)/100);
-set(handles.di, 'string', round(results(2)*100000)/100);
+set(handles.lm, 'string', round(results(1)*10000)/10);
+set(handles.di, 'string', round(results(2)*10000)/10);
 set(handles.pp, 'string', round(results(3)));
 set(handles.mass, 'string', results(4));
 
